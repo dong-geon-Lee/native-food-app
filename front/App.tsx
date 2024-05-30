@@ -1,5 +1,8 @@
+import {NavigationContainer} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, Text, TextInput, View} from 'react-native';
+import AuthHomeScreen from './src/screens/AuthHomeScreen';
+import AuthStackNavigator from './src/navigation/AuthStackNavigator';
 
 const App = () => {
   const [name, setName] = useState('');
@@ -9,16 +12,9 @@ const App = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.inputContainer}>
-        <Text>이름</Text>
-        <TextInput
-          style={styles.input}
-          value={name}
-          onChangeText={handleChangeInput}
-        />
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <AuthStackNavigator />
+    </NavigationContainer>
   );
 };
 
