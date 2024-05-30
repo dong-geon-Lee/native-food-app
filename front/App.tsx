@@ -1,12 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, Text, TextInput, View} from 'react-native';
 
 const App = () => {
+  const [name, setName] = useState('');
+
+  const handleChangeInput = (e: string) => {
+    setName(e);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.inputContainer}>
         <Text>이름</Text>
-        <TextInput style={styles.input} />
+        <TextInput
+          style={styles.input}
+          value={name}
+          onChangeText={handleChangeInput}
+        />
       </View>
     </SafeAreaView>
   );
