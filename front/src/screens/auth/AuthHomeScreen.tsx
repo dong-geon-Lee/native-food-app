@@ -30,6 +30,7 @@ function AuthHomeScreen({navigation}: AuthHomeScreenProps) {
           variant="outlined"
           onPress={() => navigation.navigate(authNaviagtions.SIGNUP)}
         />
+        {/* <InputField /> */}
       </View>
     </SafeAreaView>
   );
