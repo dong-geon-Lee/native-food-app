@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import InputField from '../../components/InputField';
+import CustomButton from '../../components/CustomButton';
 
 function LoginScreen() {
   const [values, setValues] = useState({
@@ -17,10 +18,12 @@ function LoginScreen() {
     setValues({...values, [name]: text});
   };
 
-  console.log(values);
-
   const handleBlur = (name: string) => {
     setTouched({...touched, [name]: true});
+  };
+
+  const handleSubmit = () => {
+    console.log(values);
   };
 
   return (
@@ -45,6 +48,12 @@ function LoginScreen() {
           onBlur={() => handleBlur('password')}
         />
       </View>
+      <CustomButton
+        label="로그인"
+        variant="filled"
+        size="large"
+        onPress={handleSubmit}
+      />
     </SafeAreaView>
   );
 }
@@ -56,6 +65,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     gap: 20,
+    marginBottom: 30,
   },
 });
 
