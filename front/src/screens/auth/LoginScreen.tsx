@@ -2,10 +2,10 @@ import React from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import InputField from '../../components/InputField';
 import CustomButton from '../../components/CustomButton';
-import useForm from '../../hooks/useForm';
+import {useForm} from '../../hooks/useForm';
 import {validateLogin} from '../../utils';
 
-function LoginScreen() {
+const LoginScreen = () => {
   const login = useForm({
     initialValue: {email: '', password: ''},
     validate: validateLogin,
@@ -41,7 +41,7 @@ function LoginScreen() {
       />
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

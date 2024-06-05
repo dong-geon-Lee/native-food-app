@@ -3,7 +3,7 @@ type UserInfomation = {
   password: string;
 };
 
-function validateLogin(values: UserInfomation) {
+export const validateLogin = (values: UserInfomation) => {
   const errors = {
     email: '',
     password: '',
@@ -17,6 +17,4 @@ function validateLogin(values: UserInfomation) {
   }
 
   return errors;
-}
-
-export {validateLogin};
+};
