@@ -3,8 +3,11 @@ type UserInfomation = {
   password: string;
 };
 
-const validateUser = (values: UserInfomation) => {
-  const errors = {email: '', password: ''};
+function validateUser(values: UserInfomation) {
+  const errors = {
+    email: '',
+    password: '',
+  };
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
     errors.email = '올바른 이메일 형식이 아닙니다.';
@@ -14,21 +17,21 @@ const validateUser = (values: UserInfomation) => {
   }
 
   return errors;
-};
+}
 
-export const validateLogin = (values: UserInfomation) => {
+function validateLogin(values: UserInfomation) {
   return validateUser(values);
-};
+}
 
-export const validateSignup = (
-  values: UserInfomation & {passwordConfirm: string},
-) => {
+function validateSignup(values: UserInfomation & {passwordConfirm: string}) {
   const errors = validateUser(values);
   const signupErrors = {...errors, passwordConfirm: ''};
 
   if (values.password !== values.passwordConfirm) {
-    signupErrors.passwordConfirm = '비밀번호가 일치하지 않습니다';
+    signupErrors.passwordConfirm = '비밀번호가 일치하지않습니다.';
   }
 
   return signupErrors;
-};
+}
+
+export {validateLogin, validateSignup};

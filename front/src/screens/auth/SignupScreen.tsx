@@ -1,15 +1,16 @@
-import {SafeAreaView, StyleSheet, TextInput, View} from 'react-native';
 import React, {useRef} from 'react';
-import {useForm} from '@/hooks/useForm';
-import {validateSignup} from '@/utils';
-import {useAuth} from '@/hooks/queries/useAuth';
+import {SafeAreaView, StyleSheet, TextInput, View} from 'react-native';
+
 import InputField from '@/components/InputField';
 import CustomButton from '@/components/CustomButton';
+import useForm from '@/hooks/useForm';
+import useAuth from '@/hooks/queries/useAuth';
+import {validateSignup} from '@/utils';
 
-const SignupScreen = () => {
+function SignupScreen() {
+  const {signupMutation, loginMutation} = useAuth();
   const passwordRef = useRef<TextInput | null>(null);
   const passwordConfirmRef = useRef<TextInput | null>(null);
-  const {signupMutation, loginMutation} = useAuth();
   const signup = useForm({
     initialValue: {email: '', password: '', passwordConfirm: ''},
     validate: validateSignup,
@@ -17,7 +18,6 @@ const SignupScreen = () => {
 
   const handleSubmit = () => {
     const {email, password} = signup.values;
-
     signupMutation.mutate(
       {email, password},
       {
@@ -58,6 +58,7 @@ const SignupScreen = () => {
           error={signup.errors.passwordConfirm}
           touched={signup.touched.passwordConfirm}
           secureTextEntry
+          returnKeyType="join"
           onSubmitEditing={handleSubmit}
           {...signup.getTextInputProps('passwordConfirm')}
         />
@@ -65,9 +66,7 @@ const SignupScreen = () => {
       <CustomButton label="회원가입" onPress={handleSubmit} />
     </SafeAreaView>
   );
-};
-
-export default SignupScreen;
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -79,3 +78,5 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
 });
+
+export default SignupScreen;

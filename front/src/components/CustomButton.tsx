@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Pressable,
   StyleSheet,
@@ -6,7 +7,7 @@ import {
   Dimensions,
   View,
 } from 'react-native';
-import React from 'react';
+
 import {colors} from '@/constants';
 
 interface CustomButtonProps extends PressableProps {
@@ -18,38 +19,34 @@ interface CustomButtonProps extends PressableProps {
 
 const deviceHeight = Dimensions.get('screen').height;
 
-const CustomButton = ({
+function CustomButton({
   label,
   variant = 'filled',
   size = 'large',
   inValid = false,
   ...props
-}: CustomButtonProps) => {
+}: CustomButtonProps) {
   return (
     <Pressable
       disabled={inValid}
       style={({pressed}) => [
         styles.container,
-        styles[variant],
-        styles[size],
         pressed ? styles[`${variant}Pressed`] : styles[variant],
         inValid && styles.inValid,
       ]}
       {...props}>
       <View style={styles[size]}>
-        <Text style={(styles.text, styles[`${variant}Text`])}>{label}</Text>
+        <Text style={[styles.text, styles[`${variant}Text`]]}>{label}</Text>
       </View>
     </Pressable>
   );
-};
-
-export default CustomButton;
+}
 
 const styles = StyleSheet.create({
   container: {
     borderRadius: 3,
-    justifyContent: 'center',
     flexDirection: 'row',
+    justifyContent: 'center',
   },
   inValid: {
     opacity: 0.5,
@@ -73,15 +70,15 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingVertical: deviceHeight > 700 ? 15 : 10,
     alignItems: 'center',
-    justifyContent: 'center',
     flexDirection: 'row',
+    justifyContent: 'center',
   },
   medium: {
     width: '50%',
     paddingVertical: deviceHeight > 700 ? 12 : 8,
     alignItems: 'center',
-    justifyContent: 'center',
     flexDirection: 'row',
+    justifyContent: 'center',
   },
   text: {
     fontSize: 16,
@@ -94,3 +91,5 @@ const styles = StyleSheet.create({
     color: colors.PINK_700,
   },
 });
+
+export default CustomButton;

@@ -1,44 +1,55 @@
+import {useEffect} from 'react';
 import {useMutation, useQuery} from '@tanstack/react-query';
+
 import {
+  ResponseProfile,
   getAccessToken,
   getProfile,
   logout,
   postLogin,
   postSignup,
 } from '@/api/auth';
-import {UseMutationCustomOptions, UseQueryCustomOptions} from '@/types/common';
-import {removeEncryptStorage, setEncryptStorage} from '@/utils';
-import {removeHeader, setHeader} from '@/utils/header';
-import {useEffect} from 'react';
-import {queryClient} from '@/api/queryClient';
+import {
+  removeEncryptStorage,
+  removeHeader,
+  setEncryptStorage,
+  setHeader,
+} from '@/utils';
+import queryClient from '@/api/queryClient';
 import {numbers, queryKeys, storageKeys} from '@/constants';
+import type {
+  UseMutationCustomOptions,
+  UseQueryCustomOptions,
+} from '@/types/common';
 
-export const useSignup = (mutationOptions?: UseMutationCustomOptions) => {
+function useSignup(mutationOptions?: UseMutationCustomOptions) {
   return useMutation({
     mutationFn: postSignup,
     ...mutationOptions,
   });
-};
+}
 
-export const useLogin = (mutationOptions?: UseMutationCustomOptions) => {
+function useLogin(mutationOptions?: UseMutationCustomOptions) {
   return useMutation({
     mutationFn: postLogin,
     onSuccess: ({accessToken, refreshToken}) => {
-      setEncryptStorage(storageKeys.REFRESH_TOKEN, refreshToken);
       setHeader('Authorization', `Bearer ${accessToken}`);
+      setEncryptStorage(storageKeys.REFRESH_TOKEN, refreshToken);
     },
     onSettled: () => {
       queryClient.refetchQueries({
         queryKey: [queryKeys.AUTH, queryKeys.GET_ACCESS_TOKEN],
       });
-      queryClient.invalidateQueries({queryKey: [queryKeys.AUTH]});
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.AUTH, queryKeys.GET_PROFILE],
+      });
     },
     ...mutationOptions,
   });
-};
+}
 
-export const useGetRefreshToken = () => {
-  const {isSuccess, data, isError} = useQuery({
+function useGetRefreshToken() {
+  const {data, error, isSuccess, isError} = useQuery({
     queryKey: [queryKeys.AUTH, queryKeys.GET_ACCESS_TOKEN],
     queryFn: getAccessToken,
     staleTime: numbers.ACCESS_TOKEN_REFRESH_TIME,
@@ -52,8 +63,6 @@ export const useGetRefreshToken = () => {
       setHeader('Authorization', `Bearer ${data.accessToken}`);
       setEncryptStorage(storageKeys.REFRESH_TOKEN, data.refreshToken);
     }
-    // data.accessToken, data.refreshToken or data
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
 
   useEffect(() => {
@@ -64,17 +73,17 @@ export const useGetRefreshToken = () => {
   }, [isError]);
 
   return {isSuccess, isError};
-};
+}
 
-export const useGetProfile = (queryOptions?: UseQueryCustomOptions) => {
+function useGetProfile(queryOptions?: UseQueryCustomOptions<ResponseProfile>) {
   return useQuery({
-    queryKey: [queryKeys.AUTH, queryKeys.GET_PROFILE],
     queryFn: getProfile,
+    queryKey: [queryKeys.AUTH, queryKeys.GET_PROFILE],
     ...queryOptions,
   });
-};
+}
 
-export const useLogout = (mutationOptions?: UseMutationCustomOptions) => {
+function useLogout(mutationOptions?: UseMutationCustomOptions) {
   return useMutation({
     mutationFn: logout,
     onSuccess: () => {
@@ -86,9 +95,9 @@ export const useLogout = (mutationOptions?: UseMutationCustomOptions) => {
     },
     ...mutationOptions,
   });
-};
+}
 
-export const useAuth = () => {
+function useAuth() {
   const signupMutation = useSignup();
   const refreshTokenQuery = useGetRefreshToken();
   const getProfileQuery = useGetProfile({
@@ -101,8 +110,10 @@ export const useAuth = () => {
   return {
     signupMutation,
     loginMutation,
-    isLogin,
     getProfileQuery,
+    isLogin,
     logoutMutation,
   };
-};
+}
+
+export default useAuth;

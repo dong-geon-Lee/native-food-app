@@ -1,15 +1,16 @@
+import React, {ForwardedRef, forwardRef, useRef} from 'react';
 import {
   Dimensions,
-  Pressable,
   StyleSheet,
-  Text,
   TextInput,
-  TextInputProps,
   View,
+  TextInputProps,
+  Text,
+  Pressable,
 } from 'react-native';
-import React, {ForwardedRef, forwardRef, useRef} from 'react';
-import {colors} from '@/constants';
+
 import {mergeRefs} from '@/utils';
+import {colors} from '@/constants';
 
 interface InputFieldProps extends TextInputProps {
   disabled?: boolean;
@@ -57,8 +58,6 @@ const InputField = forwardRef(
   },
 );
 
-export default InputField;
-
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
@@ -84,3 +83,5 @@ const styles = StyleSheet.create({
     paddingTop: 5,
   },
 });
+
+export default InputField;

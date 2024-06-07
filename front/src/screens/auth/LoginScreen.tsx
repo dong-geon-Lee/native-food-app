@@ -1,14 +1,15 @@
 import React, {useRef} from 'react';
 import {SafeAreaView, StyleSheet, TextInput, View} from 'react-native';
+
 import InputField from '@/components/InputField';
 import CustomButton from '@/components/CustomButton';
-import {useForm} from '@/hooks/useForm';
+import useForm from '@/hooks/useForm';
+import useAuth from '@/hooks/queries/useAuth';
 import {validateLogin} from '@/utils';
-import {useAuth} from '@/hooks/queries/useAuth';
 
-const LoginScreen = () => {
-  const passwordRef = useRef<TextInput | null>(null);
+function LoginScreen() {
   const {loginMutation} = useAuth();
+  const passwordRef = useRef<TextInput | null>(null);
   const login = useForm({
     initialValue: {email: '', password: ''},
     validate: validateLogin,
@@ -40,7 +41,6 @@ const LoginScreen = () => {
           touched={login.touched.password}
           secureTextEntry
           returnKeyType="join"
-          blurOnSubmit={false}
           onSubmitEditing={handleSubmit}
           {...login.getTextInputProps('password')}
         />
@@ -53,7 +53,7 @@ const LoginScreen = () => {
       />
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
