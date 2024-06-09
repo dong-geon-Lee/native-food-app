@@ -43,6 +43,9 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-MatzipApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MatzipApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = MatzipApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-MatzipApp-MatzipAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatzipApp-MatzipAppTests.release.xcconfig"; path = "Target Support Files/Pods-MatzipApp-MatzipAppTests/Pods-MatzipApp-MatzipAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		8B74779D2C152F9F004860D7 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Octicons.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		8B74779E2C152F9F004860D7 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		8B74779F2C152F9F004860D7 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -116,6 +119,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				8B74779C2C152C91004860D7 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* MatzipApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* MatzipAppTests */,
@@ -135,6 +139,16 @@
 				00E356EE1AD99517003FC87E /* MatzipAppTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8B74779C2C152C91004860D7 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				8B74779E2C152F9F004860D7 /* Ionicons.ttf */,
+				8B74779F2C152F9F004860D7 /* MaterialIcons.ttf */,
+				8B74779D2C152F9F004860D7 /* Octicons.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
