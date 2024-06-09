@@ -6,7 +6,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
 import {MapStackParamList} from '@/navigations/stack/MapStackNavigator';
 import {colors, mapNavigations} from '@/constants';
@@ -16,6 +16,8 @@ import CustomButton from '@/components/CustomButton';
 import useForm from '@/hooks/useForm';
 import {validateAddPost} from '@/utils';
 import AddPostHeaderRight from '@/components/AddPostHeaderRight';
+import useMutateCreatePost from '@/hooks/queries/useMutateCreatePost';
+import {MarkerColor} from '@/types';
 
 type AddPostScreenProps = StackScreenProps<
   MapStackParamList,
@@ -25,12 +27,32 @@ type AddPostScreenProps = StackScreenProps<
 const AddPostScreen = ({route, navigation}: AddPostScreenProps) => {
   const {location} = route.params;
   const descriptionRef = useRef<TextInput | null>(null);
+  const createPost = useMutateCreatePost();
   const addPost = useForm({
     initialValue: {title: '', description: ''},
     validate: validateAddPost,
   });
 
-  const handleSubmit = () => {};
+  const [markerColor, setMarkerColor] = useState<MarkerColor>('RED');
+  const [score, setScore] = useState(5);
+  const [address, setAddress] = useState('');
+
+  const handleSubmit = () => {
+    const body = {
+      date: new Date(),
+      title: addPost.values.title,
+      description: addPost.values.description,
+      color: markerColor,
+      score,
+      imageUris: [],
+    };
+    createPost.mutate(
+      {address, ...location, ...body},
+      {
+        onSuccess: () => navigation.goBack(),
+      },
+    );
+  };
 
   useEffect(() => {
     navigation.setOptions({
