@@ -1710,6 +1710,11 @@
   "resolved" "https://registry.npmjs.org/@react-native-community/geolocation/-/geolocation-3.2.1.tgz"
   "version" "3.2.1"
 
+"@react-native-community/slider@^4.5.2":
+  "integrity" "sha512-DbFyCyI7rwl0FkBkp0lzEVp+5mNfS5qU/nM2sK2aSguWhj0Odkt1aKHP2iW/ljruOhgS/O4dEixXlne4OdZJDQ=="
+  "resolved" "https://registry.npmjs.org/@react-native-community/slider/-/slider-4.5.2.tgz"
+  "version" "4.5.2"
+
 "@react-native-masked-view/masked-view@^0.3.0":
   "integrity" "sha512-qLyoObcjzrkpNcoJjXquUePXfL1dXjHtuv+yX0zZ0Q4kG5yvVqd620+tSh7WbRoHkjpXhFBfLwvGhcWB2I0Lpw=="
   "resolved" "https://registry.npmjs.org/@react-native-masked-view/masked-view/-/masked-view-0.3.0.tgz"
@@ -5807,6 +5812,11 @@
   "integrity" "sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-18.2.0.tgz"
   "version" "18.2.0"
+
+"react-native-date-picker@^5.0.4":
+  "integrity" "sha512-UycNfXGd4ipgdU2a+oZGj7h1nvp8Gz49f/Ko+YdWh6nrBKB49MEp0n9eF1QngbxMKqdK0AdY4udb4IdVVWji4g=="
+  "resolved" "https://registry.npmjs.org/react-native-date-picker/-/react-native-date-picker-5.0.4.tgz"
+  "version" "5.0.4"
 
 "react-native-encrypted-storage@^4.0.3":
   "integrity" "sha512-0pJA4Aj2S1PIJEbU7pN/Qvf7JIJx3hFywx+i+bLHtgK0/6Zryf1V2xVsWcrD50dfiu3jY1eN2gesQ5osGxE7jA=="

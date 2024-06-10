@@ -18,6 +18,10 @@ import {validateAddPost} from '@/utils';
 import AddPostHeaderRight from '@/components/AddPostHeaderRight';
 import useMutateCreatePost from '@/hooks/queries/useMutateCreatePost';
 import {MarkerColor} from '@/types';
+import useGetAddress from '@/hooks/useGetAddress';
+import MarkerSelector from '@/components/MarkerSelector';
+import ScoreInput from '@/components/ScoreInput';
+import DatePickerOption from '@/components/DatePickerOption';
 
 type AddPostScreenProps = StackScreenProps<
   MapStackParamList,
@@ -35,7 +39,15 @@ const AddPostScreen = ({route, navigation}: AddPostScreenProps) => {
 
   const [markerColor, setMarkerColor] = useState<MarkerColor>('RED');
   const [score, setScore] = useState(5);
-  const [address, setAddress] = useState('');
+  const address = useGetAddress(location);
+
+  const handleSelectMarker = (name: MarkerColor) => {
+    setMarkerColor(name);
+  };
+
+  const handleChangeScore = (value: number) => {
+    setScore(value);
+  };
 
   const handleSubmit = () => {
     const body = {
@@ -65,7 +77,7 @@ const AddPostScreen = ({route, navigation}: AddPostScreenProps) => {
       <ScrollView style={styles.contentContainer}>
         <View style={styles.inputContainer}>
           <InputField
-            value=""
+            value={address}
             disabled
             icon={
               <Octicons name="location" size={16} color={colors.GRAY_500} />
@@ -90,7 +102,14 @@ const AddPostScreen = ({route, navigation}: AddPostScreenProps) => {
             returnKeyType="next"
             {...addPost.getTextInputProps('description')}
           />
+          <MarkerSelector
+            score={score}
+            markerColor={markerColor}
+            onPressMarker={handleSelectMarker}
+          />
+          <ScoreInput score={score} onChangeScore={handleChangeScore} />
         </View>
+        {/* <DatePickerOption /> */}
       </ScrollView>
     </SafeAreaView>
   );
