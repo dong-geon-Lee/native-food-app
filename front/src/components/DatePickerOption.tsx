@@ -12,36 +12,40 @@ import {colors} from '@/constants';
 
 interface DatePickerOptionProps {
   isVisible: boolean;
-  date: any;
-  onChangeDate: (date: any) => void;
+  date: Date;
+  onChangeDate: (date: Date) => void;
   onConfirmDate: () => void;
 }
 
-const DatePickerOption = ({
+function DatePickerOption({
   isVisible,
   date,
   onChangeDate,
   onConfirmDate,
-}: DatePickerOptionProps) => {
+}: DatePickerOptionProps) {
   return (
-    <Modal visible={isVisible} transparent animationType="slide">
-      <SafeAreaView style={styles.optionBackground}>
-        <View style={styles.optionBackground}>
-          <DatePicker
-            mode="date"
-            theme="light"
-            date={date}
-            onDateChange={onChangeDate}
-            locale="ko"
-          />
+    <Modal visible={isVisible} transparent={true} animationType={'slide'}>
+      <SafeAreaView style={[styles.optionBackground, styles.dimmed]}>
+        <View style={styles.optionContainer}>
+          <View style={styles.pickerContainer}>
+            <DatePicker
+              mode="date"
+              theme="light"
+              date={date}
+              onDateChange={onChangeDate}
+              locale="ko"
+            />
+          </View>
         </View>
-        <View style={styles.optionContainer}></View>
+        <View style={styles.optionContainer}>
+          <Pressable style={styles.optionButton} onPress={onConfirmDate}>
+            <Text style={styles.optionText}>확인</Text>
+          </Pressable>
+        </View>
       </SafeAreaView>
     </Modal>
   );
-};
-
-export default DatePickerOption;
+}
 
 const styles = StyleSheet.create({
   pickerContainer: {
@@ -74,3 +78,5 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
 });
+
+export default DatePickerOption;

@@ -2,7 +2,6 @@ import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
-  Text,
   TextInput,
   View,
 } from 'react-native';
@@ -39,7 +38,28 @@ const AddPostScreen = ({route, navigation}: AddPostScreenProps) => {
 
   const [markerColor, setMarkerColor] = useState<MarkerColor>('RED');
   const [score, setScore] = useState(5);
+  const [date, setDate] = useState(new Date());
+  const [isVisible, setIsVisible] = useState(false);
+  const [isPicked, setIsPicked] = useState(false);
+
   const address = useGetAddress(location);
+
+  const show = () => {
+    setIsVisible(true);
+  };
+
+  const hide = () => {
+    setIsVisible(false);
+  };
+
+  const handleConfirmDate = () => {
+    setIsPicked(true);
+    hide();
+  };
+
+  const handleChangeDate = (pickedDate: Date) => {
+    setDate(pickedDate);
+  };
 
   const handleSelectMarker = (name: MarkerColor) => {
     setMarkerColor(name);
@@ -83,7 +103,12 @@ const AddPostScreen = ({route, navigation}: AddPostScreenProps) => {
               <Octicons name="location" size={16} color={colors.GRAY_500} />
             }
           />
-          <CustomButton variant="outlined" size="large" label="날짜 선택" />
+          <CustomButton
+            variant="outlined"
+            size="large"
+            label="날짜 선택"
+            onPress={show}
+          />
           <InputField
             placeholder="제목을 입력하세요"
             error={addPost.errors.title}
@@ -108,8 +133,13 @@ const AddPostScreen = ({route, navigation}: AddPostScreenProps) => {
             onPressMarker={handleSelectMarker}
           />
           <ScoreInput score={score} onChangeScore={handleChangeScore} />
+          <DatePickerOption
+            date={date}
+            isVisible={isVisible}
+            onChangeDate={handleChangeDate}
+            onConfirmDate={handleConfirmDate}
+          />
         </View>
-        {/* <DatePickerOption /> */}
       </ScrollView>
     </SafeAreaView>
   );
